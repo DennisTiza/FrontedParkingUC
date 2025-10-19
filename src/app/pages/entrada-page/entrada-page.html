@@ -1,11 +1,12 @@
 <div class="registro-container">
   <h2>Registro de Vehículos</h2>
 
-  <form class="registro-form">
+  <form [formGroup]="fGroup" (ngSubmit)="registrarEntrada()" class="registro-form">
+    
     <!-- Tipo de vehículo -->
     <div class="form-group">
       <label for="tipoVehiculo">Tipo de vehículo</label>
-      <select id="tipoVehiculo" name="tipoVehiculo" required>
+      <select id="tipoVehiculo" formControlName="tipoVehiculo" required>
         <option value="" disabled selected>Seleccione una opción</option>
         <option value="carro">Carro</option>
         <option value="moto">Moto</option>
@@ -18,7 +19,7 @@
       <input
         type="text"
         id="placa"
-        name="placa"
+        formControlName="placa"
         placeholder="Ingrese la placa"
         required
       />
@@ -26,19 +27,19 @@
 
     <!-- Hora -->
     <div class="form-group">
-      <label for="Hora">Hora</label>
+      <label for="hora">Hora</label>
       <input
         type="text"
-        id="Hora"
-        name="Hora"
-        placeholder="Hora"
-        [value]="hora()"
+        id="hora"
+        formControlName="hora"
+        [value]="horaActual"
         readonly
-        disabled
       />
     </div>
 
     <!-- Botón -->
-    <button type="submit" class="btn-registrar">Registrar</button>
+    <button type="submit" class="btn-registrar" [disabled]="fGroup.invalid">
+      Registrar
+    </button>
   </form>
 </div>
