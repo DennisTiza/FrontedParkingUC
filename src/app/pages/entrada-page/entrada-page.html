@@ -1,0 +1,44 @@
+<div class="registro-container">
+  <h2>Registro de Vehículos</h2>
+
+  <form class="registro-form">
+    <!-- Tipo de vehículo -->
+    <div class="form-group">
+      <label for="tipoVehiculo">Tipo de vehículo</label>
+      <select id="tipoVehiculo" name="tipoVehiculo" required>
+        <option value="" disabled selected>Seleccione una opción</option>
+        <option value="carro">Carro</option>
+        <option value="moto">Moto</option>
+      </select>
+    </div>
+
+    <!-- Placa -->
+    <div class="form-group">
+      <label for="placa">Placa</label>
+      <input
+        type="text"
+        id="placa"
+        name="placa"
+        placeholder="Ingrese la placa"
+        required
+      />
+    </div>
+
+    <!-- Hora -->
+    <div class="form-group">
+      <label for="Hora">Hora</label>
+      <input
+        type="text"
+        id="Hora"
+        name="Hora"
+        placeholder="Hora"
+        [value]="hora()"
+        readonly
+        disabled
+      />
+    </div>
+
+    <!-- Botón -->
+    <button type="submit" class="btn-registrar">Registrar</button>
+  </form>
+</div>
