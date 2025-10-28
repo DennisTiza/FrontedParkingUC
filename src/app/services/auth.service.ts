@@ -1,45 +1,68 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-
-interface LoginRequest {
-    email: string;
-    password: string;
-}
-
-interface LoginResponse {
-    access_token: string;
-    user: {
-        id: number;
-        name: string;
-        email: string;
-    };
-}
-
-interface User {
-  id: number;
-  name: string;
-  cedula: string;
-  role: string;
-  email: string;
-  password: string;
-}
+import { UsuarioModel } from '../models/usuario.model';
+import { LoginModel } from '../models/login.model';
+import { UsuarioValidadoModel } from '../models/usuariovalidado.model';
+import { ConfiguracionRutas } from '../config/configuracion.rutas';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
+    urlBackend: string = ConfiguracionRutas.urlBackend;
 
-    private apiUrl = `${environment.apiUrl}`;
+
+    private sesionActivaSubject = new BehaviorSubject<boolean>(this.verificarToken());
+
+    public sesionActiva$ = this.sesionActivaSubject.asObservable();
 
     constructor(private http: HttpClient) { }
 
-    login(credentials: LoginRequest): Observable<LoginResponse> {
-        return this.http.post<LoginResponse>(`${this.apiUrl}/auth/login`, credentials);
+    private verificarToken(): boolean {
+        const token = localStorage.getItem('token');
+        return !!token;
     }
 
-    register(data:User): Observable<any> {
-    return this.http.post(`${this.apiUrl}/usuario/register`, data);
-  }
+
+    login(credentials: LoginModel): Observable<UsuarioValidadoModel> {
+        return this.http.post<UsuarioValidadoModel>(`${this.urlBackend}auth/login`, credentials)
+            .pipe(
+                tap(res => {
+                    if (res.access_token) {
+                        localStorage.setItem('token', res.access_token);
+                        this.sesionActivaSubject.next(true);
+                    }
+                })
+            );
+    }
+
+
+    register(data: UsuarioModel): Observable<any> {
+        return this.http.post(`${this.urlBackend}usuario/register`, data);
+    }
+
+
+    logout(): void {
+        localStorage.removeItem('token');
+        this.sesionActivaSubject.next(false);
+    }
+
+
+    getToken(): string | null {
+        return localStorage.getItem('token');
+    }
+
+    estaAutenticado(): boolean {
+        return this.sesionActivaSubject.value;
+    }
+
+    verificarSesion(): void {
+        const tieneToken = this.verificarToken();
+        if (this.sesionActivaSubject.value !== tieneToken) {
+            this.sesionActivaSubject.next(tieneToken);
+        }
+    }
 }

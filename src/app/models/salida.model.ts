@@ -1,4 +1,4 @@
-export class EntradaModel {
+export class SalidaModel {
   placa?: string;
   hora?: Date;
 }

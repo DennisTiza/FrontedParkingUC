@@ -3,4 +3,18 @@
     <img src="/assets/logo-uc.png" class="logo" />
     <span class="title">Parking UC</span>
   </div>
+
+  <div class="navbar-right">
+    <ng-container *ngIf="!sesionActiva; else usuarioLogueado">
+      <a routerLink="/login" class="login-link">Inicio de sesión</a>
+    </ng-container>
+
+    <ng-template #usuarioLogueado>
+      <a routerLink="/entrada" class="entrada-link">Entrada</a>
+      <a routerLink="/salida" class="salida-link">Salida</a>
+      <a routerLink="/register" class="register-link">Registro</a>
+      <a (click)="cerrarSesion()" class="cerrarsesion-link">Cerrar Sesión</a>
+    </ng-template>
+  </div>
 </nav>
+

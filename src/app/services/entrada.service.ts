@@ -8,11 +8,11 @@ import { ConfiguracionRutas } from '../config/configuracion.rutas';
   providedIn: 'root'
 })
 export class EntradaService {
-  private url = ConfiguracionRutas.urlBackend
+  urlBackend: string = ConfiguracionRutas.urlBackend;
 
   constructor(private http: HttpClient) {}
 
   registrarEntrada(data: EntradaModel): Observable<EntradaModel> {
-    return this.http.post<EntradaModel>(`${this.url}entradas`, data);
+    return this.http.post<EntradaModel>(`${this.urlBackend}entradas`, data);
   }
 }
