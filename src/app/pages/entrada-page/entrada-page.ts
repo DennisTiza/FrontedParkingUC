@@ -52,8 +52,9 @@ export class EntradaPage implements OnInit {
 
     const campos = this.ObtenerFormGroup;
     const datos: EntradaModel = {
-      placa: campos['placa'].value,
-      hora: new Date()
+      vehiculoPlaca: campos['placa'].value,
+      usuarioId: localStorage.getItem('sesion') ? JSON.parse(localStorage.getItem('sesion')!).id : null,
+      parqueaderoId: localStorage.getItem('sesion') ? JSON.parse(localStorage.getItem('sesion')!).parqueadero : null
     };
 
     this.EntradaService.registrarEntrada(datos).subscribe({
@@ -63,8 +64,7 @@ export class EntradaPage implements OnInit {
         this.setHoraActual();
       },
       error: (err) => {
-        console.error('Error al registrar entrada:', err);
-        alert('Error al registrar la entrada');
+        alert(`Error al registrar la entrada. \n${err?.error?.message || err.message}`);
       }
     });
   }

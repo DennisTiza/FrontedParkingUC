@@ -1,4 +1,6 @@
 export class EntradaModel {
-  placa?: string;
+  vehiculoPlaca?: string;
   hora?: Date;
+  usuarioId?: number;
+  parqueaderoId?: number;
 }

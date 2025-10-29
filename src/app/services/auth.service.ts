@@ -32,7 +32,12 @@ export class AuthService {
             .pipe(
                 tap(res => {
                     if (res.access_token) {
-                        localStorage.setItem('token', res.access_token);
+                        localStorage.setItem('sesion', JSON.stringify({
+                            access_token: res.access_token,
+                            nombre: res.user?.nombre || '',
+                            id: res.user?.id || '',
+                            rol: res.user?.rol || ''
+                        }));
                         this.sesionActivaSubject.next(true);
                     }
                 })
@@ -46,7 +51,7 @@ export class AuthService {
 
 
     logout(): void {
-        localStorage.removeItem('token');
+        localStorage.removeItem('sesion');
         this.sesionActivaSubject.next(false);
     }
 

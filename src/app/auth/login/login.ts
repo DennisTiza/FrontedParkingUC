@@ -24,7 +24,7 @@ export class Login {
     private authService: AuthService  
   ) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      correo: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
@@ -43,11 +43,14 @@ onSubmit() {
   this.authService.login(credentials).subscribe({
     next: (res) => {
       console.log('Inicio de sesión exitoso:', res);
-      this.router.navigate(['/entrada']);
+      this.router.navigate(['/parqueadero']);
     },
     error: (err) => {
+      
       this.errorMessage =
         err?.error?.message || 'Credenciales incorrectas o error del servidor.';
+      console.log(this.errorMessage);
+      
       this.isLoading = false;
     },
     complete: () => {
@@ -63,6 +66,6 @@ onSubmit() {
     });
   }
 
-  get email() { return this.loginForm.get('email'); }
+  get correo() { return this.loginForm.get('correo'); }
   get password() { return this.loginForm.get('password'); }
 }

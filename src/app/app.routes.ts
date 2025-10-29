@@ -3,6 +3,7 @@ import { EntradaPage } from './pages/entrada-page/entrada-page';
 import { Login } from './auth/login/login';
 import { Register } from './auth/register/register';
 import { SalidaPage } from './pages/salida-page/salida-page';
+import { ParqueaderoPage } from './pages/parqueadero-page/parqueadero-page';
 
 export const routes: Routes = [
     {
@@ -24,5 +25,9 @@ export const routes: Routes = [
     {
         path: '', redirectTo: '/login',
         pathMatch: 'full'
+    },
+    {
+        path: 'parqueadero',
+        component: ParqueaderoPage
     }
 ];

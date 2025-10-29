@@ -1,0 +1,15 @@
+<div class="contenedor">
+  <div class="card">
+    <h2>Selecciona tu parqueadero</h2>
+
+    <form [formGroup]="form" (ngSubmit)="registrar()">
+      <label for="parqueadero">Parqueadero</label>
+      <select id="parqueadero" formControlName="parqueadero" required>
+        <option value="">Elige uno</option>
+        <option *ngFor="let p of parqueaderos" [value]="p.id">{{ p.nombre }}</option>
+      </select>
+
+      <button type="submit" [disabled]="!form.value.parqueadero">Registrar</button>
+    </form>
+  </div>
+</div>
