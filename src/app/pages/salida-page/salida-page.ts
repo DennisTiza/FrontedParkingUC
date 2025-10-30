@@ -52,19 +52,18 @@ export class SalidaPage implements OnInit {
 
     const campos = this.ObtenerFormGroup;
     const datos: SalidaModel = {
-      placa: campos['placa'].value,
-      hora: new Date()
+      horaSalida: new Date()
     };
+    const placa = campos['placa'].value;
 
-    this.SalidaService.registrarSalida(datos).subscribe({
+    this.SalidaService.registrarSalida(datos, placa).subscribe({
       next: () => {
         alert('Salida registrada correctamente');
         this.fGroup.reset();
         this.setHoraActual();
       },
       error: (err) => {
-        console.error('Error al registrar salida:', err);
-        alert('Error al registrar la salida');
+        alert(`Error al registrar la salida. \n${err.message || err}`);
       }
     });
   }

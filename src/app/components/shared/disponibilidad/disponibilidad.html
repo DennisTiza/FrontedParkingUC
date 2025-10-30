@@ -1,0 +1,37 @@
+<button class="btn-disponibilidad" (click)="mostrarModal = true">
+  Disponibilidad
+</button>
+
+<div class="overlay" *ngIf="mostrarModal">
+  <div class="modal">
+    <button class="close-btn" (click)="mostrarModal = false">&times;</button>
+    
+    <div class="modal-header">
+      <h2>Disponibilidad de Vehículos</h2>
+    </div>
+    
+    <table class="availability-table">
+      <thead>
+        <tr>
+          <th>Tipo de vehículo</th>
+          <th>Cupos disponibles</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vehicle of vehicleAvailability">
+          <td>{{ vehicle.type }}</td>
+          <td>{{ vehicle.available }}</td>
+          <td>
+            <span 
+              class="status" 
+              [class.status-available]="vehicle.status === 'Disponible'"
+              [class.status-full]="vehicle.status !== 'Disponible'">
+              {{ vehicle.status }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
