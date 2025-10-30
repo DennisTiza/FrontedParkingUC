@@ -1,4 +1,4 @@
-<button class="btn-disponibilidad" (click)="mostrarModal = true">
+<button class="btn-disponibilidad" *ngIf="sesionActiva" (click)="mostrarModal = true">
   Disponibilidad
 </button>
 

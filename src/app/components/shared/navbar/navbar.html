@@ -5,16 +5,16 @@
   </div>
 
   <div class="navbar-right">
-    <ng-container *ngIf="!sesionActiva; else usuarioLogueado">
+    <ng-container *ngIf="!sesionActiva">
       <a routerLink="/login" class="login-link">Inicio de sesión</a>
     </ng-container>
 
-    <ng-template #usuarioLogueado>
+    <ng-container *ngIf="sesionActiva">
       <a routerLink="/entrada" class="entrada-link">Entrada</a>
       <a routerLink="/salida" class="salida-link">Salida</a>
       <a routerLink="/register" class="register-link">Registro</a>
       <a (click)="cerrarSesion()" class="cerrarsesion-link">Cerrar Sesión</a>
-    </ng-template>
+    </ng-container>
   </div>
 </nav>
 

@@ -4,30 +4,37 @@ import { Login } from './auth/login/login';
 import { Register } from './auth/register/register';
 import { SalidaPage } from './pages/salida-page/salida-page';
 import { ParqueaderoPage } from './pages/parqueadero-page/parqueadero-page';
+import { ValidarSesionInactivaGuard } from './guard/validar-sesion-inactiva.guard';
+import { ValidarSesionActivaGuard } from './guard/validar-sesion-activa.guard';
 
 export const routes: Routes = [
     {
         path: 'entrada',
-        component: EntradaPage
+        component: EntradaPage,
+        canActivate: [ValidarSesionActivaGuard]
     },
     {
         path: 'login',
-        component: Login
+        component: Login,
+        canActivate: [ValidarSesionInactivaGuard]
     },
     {
         path: 'register',
-        component: Register
+        component: Register,
+        canActivate: [ValidarSesionActivaGuard]
     },
     {
         path: 'salida',
-        component: SalidaPage
+        component: SalidaPage,
+        canActivate: [ValidarSesionActivaGuard]
     },
     {
         path: '', redirectTo: '/login',
-        pathMatch: 'full'
+        pathMatch: 'full',
     },
     {
         path: 'parqueadero',
-        component: ParqueaderoPage
+        component: ParqueaderoPage,
+        canActivate: [ValidarSesionActivaGuard]
     }
 ];

@@ -23,7 +23,10 @@ export class Navbar implements OnInit, OnDestroy {
   ngOnInit(): void {
     // Suscribirse a cambios de sesión
     this.subscription = this.authService.sesionActiva$.subscribe(
-      estado => this.sesionActiva = estado
+      datos => {
+        // Verificar si hay token válido
+        this.sesionActiva = !!datos.access_token;
+      }
     );
   }
 

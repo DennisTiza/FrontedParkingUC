@@ -6,6 +6,18 @@
   border-bottom: 2px solid #aaa;
   padding: 0.5rem 2rem;
   font-family: "Segoe UI", sans-serif;
+  
+  /* Asegurar que ocupe todo el ancho */
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  
+  /* Opcional: fijar en la parte superior */
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 .navbar-left {
@@ -35,6 +47,7 @@
   color: #333;
   font-weight: 500;
   transition: color 0.2s ease;
+  cursor: pointer;
 }
 
 .navbar-right a:hover {
