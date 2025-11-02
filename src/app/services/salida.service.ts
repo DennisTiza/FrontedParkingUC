@@ -20,7 +20,7 @@ export class SalidaService {
       'Authorization': `Bearer ${token}`
     });
 
-    return this.http.post(`${this.urlBackend}registro/vehiculo/${placa}/salida`, datos, { headers });
+    return this.http.patch(`${this.urlBackend}registro/vehiculo/${placa}/salida`, datos, { headers });
   }
 
 }

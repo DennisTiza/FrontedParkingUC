@@ -1,4 +1,4 @@
-<button class="btn-disponibilidad" *ngIf="sesionActiva" (click)="mostrarModal = true">
+<button class="btn-disponibilidad" *ngIf="sesionActiva" (click)="abrirModal()">
   Disponibilidad
 </button>
 
@@ -19,7 +19,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let vehicle of vehicleAvailability">
+        <tr *ngFor="let vehicle of vehicle">
           <td>{{ vehicle.type }}</td>
           <td>{{ vehicle.available }}</td>
           <td>

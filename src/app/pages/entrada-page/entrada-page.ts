@@ -53,7 +53,7 @@ export class EntradaPage implements OnInit {
     const campos = this.ObtenerFormGroup;
     const datos: EntradaModel = {
       vehiculoPlaca: campos['placa'].value,
-      usuarioId: localStorage.getItem('sesion') ? JSON.parse(localStorage.getItem('sesion')!).id : null,
+      usuarioId: localStorage.getItem('sesion') ? JSON.parse(localStorage.getItem('sesion')!).user.id : null,
       parqueaderoId: localStorage.getItem('sesion') ? JSON.parse(localStorage.getItem('sesion')!).parqueadero : null
     };
 
