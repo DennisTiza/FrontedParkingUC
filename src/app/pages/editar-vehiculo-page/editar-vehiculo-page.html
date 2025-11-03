@@ -1,0 +1,149 @@
+<div class="registro-container">
+  <h2>Editar Vehículo</h2>
+
+  <div *ngIf="cargando" class="loading-message">
+    Cargando datos del vehículo...
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+
+  <form [formGroup]="fGroup" (ngSubmit)="actualizarVehiculo()" class="registro-form" *ngIf="!cargando">
+
+    <!-- Placa (deshabilitada) -->
+    <div class="form-group">
+      <label for="placa">Placa</label>
+      <input
+        type="text"
+        id="placa"
+        formControlName="placa"
+        readonly
+        class="input-disabled"
+      />
+      <small class="info-text">La placa no se puede modificar</small>
+    </div>
+
+    <!-- Tipo -->
+    <div class="form-group">
+      <label for="tipo">Tipo de Vehículo</label>
+      <select
+        id="tipo"
+        formControlName="tipo"
+        [class.error]="ObtenerFormGroup['tipo']?.invalid && ObtenerFormGroup['tipo']?.touched"
+      >
+        <option value="">Seleccione el tipo</option>
+        <option *ngFor="let tipo of tiposVehiculo" [value]="tipo">{{ tipo }}</option>
+      </select>
+
+      <div *ngIf="ObtenerFormGroup['tipo']?.invalid && ObtenerFormGroup['tipo']?.touched" class="validation-error">
+        <div *ngIf="ObtenerFormGroup['tipo']?.errors?.['required']">
+          El tipo de vehículo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Marca -->
+    <div class="form-group">
+      <label for="marca">Marca</label>
+      <input
+        type="text"
+        id="marca"
+        formControlName="marca"
+        placeholder="Ingrese la marca"
+        [class.error]="ObtenerFormGroup['marca']?.invalid && ObtenerFormGroup['marca']?.touched"
+      />
+
+      <div *ngIf="ObtenerFormGroup['marca']?.invalid && ObtenerFormGroup['marca']?.touched" class="validation-error">
+        <div *ngIf="ObtenerFormGroup['marca']?.errors?.['required']">
+          La marca es requerida
+        </div>
+      </div>
+    </div>
+
+    <!-- Modelo -->
+    <div class="form-group">
+      <label for="modelo">Modelo</label>
+      <input
+        type="text"
+        id="modelo"
+        formControlName="modelo"
+        placeholder="Ingrese el modelo"
+        [class.error]="ObtenerFormGroup['modelo']?.invalid && ObtenerFormGroup['modelo']?.touched"
+      />
+
+      <div *ngIf="ObtenerFormGroup['modelo']?.invalid && ObtenerFormGroup['modelo']?.touched" class="validation-error">
+        <div *ngIf="ObtenerFormGroup['modelo']?.errors?.['required']">
+          El modelo es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Color -->
+    <div class="form-group">
+      <label for="color">Color</label>
+      <input
+        type="text"
+        id="color"
+        formControlName="color"
+        placeholder="Ingrese el color"
+        [class.error]="ObtenerFormGroup['color']?.invalid && ObtenerFormGroup['color']?.touched"
+      />
+
+      <div *ngIf="ObtenerFormGroup['color']?.invalid && ObtenerFormGroup['color']?.touched" class="validation-error">
+        <div *ngIf="ObtenerFormGroup['color']?.errors?.['required']">
+          El color es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Fecha de Caducidad -->
+    <div class="form-group">
+      <label for="fechaCaducidad">Fecha de Caducidad</label>
+      <input
+        type="date"
+        id="fechaCaducidad"
+        formControlName="fechaCaducidad"
+        [class.error]="ObtenerFormGroup['fechaCaducidad']?.invalid && ObtenerFormGroup['fechaCaducidad']?.touched"
+      />
+
+      <div *ngIf="ObtenerFormGroup['fechaCaducidad']?.invalid && ObtenerFormGroup['fechaCaducidad']?.touched" class="validation-error">
+        <div *ngIf="ObtenerFormGroup['fechaCaducidad']?.errors?.['required']">
+          La fecha de caducidad es requerida
+        </div>
+      </div>
+    </div>
+
+    <!-- Código del Conductor -->
+    <div class="form-group">
+      <label for="conductorCodigo">Código del Conductor</label>
+      <input
+        type="text"
+        id="conductorCodigo"
+        formControlName="conductorCodigo"
+        placeholder="Ingrese el código del conductor"
+        [class.error]="ObtenerFormGroup['conductorCodigo']?.invalid && ObtenerFormGroup['conductorCodigo']?.touched"
+      />
+
+      <div *ngIf="ObtenerFormGroup['conductorCodigo']?.invalid && ObtenerFormGroup['conductorCodigo']?.touched" class="validation-error">
+        <div *ngIf="ObtenerFormGroup['conductorCodigo']?.errors?.['required']">
+          El código del conductor es requerido
+        </div>
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="botones-container">
+      <button type="button" class="btn-cancelar" (click)="cancelar()">
+        Cancelar
+      </button>
+      <button type="submit" class="btn-actualizar" [disabled]="fGroup.invalid">
+        Actualizar Vehículo
+      </button>
+    </div>
+  </form>
+</div>

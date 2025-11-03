@@ -63,6 +63,10 @@ export class SalidaPage implements OnInit {
         this.setHoraActual();
       },
       error: (err) => {
+        if (err.status === 404) {
+          alert(`La placa ${placa} no está registrada o no tiene una entrada asociada.`);
+          return;
+        }
         alert(`Error al registrar la salida. \n${err.message || err}`);
       }
     });

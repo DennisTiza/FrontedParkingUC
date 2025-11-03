@@ -6,6 +6,9 @@ import { SalidaPage } from './pages/salida-page/salida-page';
 import { ParqueaderoPage } from './pages/parqueadero-page/parqueadero-page';
 import { ValidarSesionInactivaGuard } from './guard/validar-sesion-inactiva.guard';
 import { ValidarSesionActivaGuard } from './guard/validar-sesion-activa.guard';
+import { VehiculoPage } from './pages/vehiculo-page/vehiculo-page';
+import { GestionVehiculoPage } from './pages/gestion-vehiculo-page/gestion-vehiculo-page';
+import { EditarVehiculoPage } from './pages/editar-vehiculo-page/editar-vehiculo-page';
 
 export const routes: Routes = [
     {
@@ -35,6 +38,21 @@ export const routes: Routes = [
     {
         path: 'parqueadero',
         component: ParqueaderoPage,
+        canActivate: [ValidarSesionActivaGuard]
+    },
+    {
+        path: 'vehiculo',
+        component: VehiculoPage,
+        canActivate: [ValidarSesionActivaGuard]
+    },
+    {
+        path: 'gestion-vehiculo',
+        component: GestionVehiculoPage,
+        canActivate: [ValidarSesionActivaGuard]
+    },
+    {
+        path: 'vehiculo/:placa',
+        component: EditarVehiculoPage,
         canActivate: [ValidarSesionActivaGuard]
     }
 ];

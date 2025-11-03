@@ -1,0 +1,91 @@
+<div class="gestion-container">
+  <div class="header">
+    <h2>Gestión de Vehículos</h2>
+  </div>
+
+  <!-- Buscador -->
+  <div class="search-container">
+    <input
+      type="text"
+      [value]="searchQuery"
+      (input)="searchQuery = $event.target.value; filtrarVehiculo()"
+      placeholder="Buscar por placa, tipo, marca, modelo, color o código conductor..."
+      class="search-input"
+    />
+  </div>
+
+  <!-- Información de resultados -->
+  <div class="info-resultados">
+    <p>Mostrando {{ vehiculosPaginados.length }} de {{ totalItems }} vehículos</p>
+  </div>
+
+  <!-- Tabla -->
+  <div class="table-container">
+    <table class="tabla-vehiculos">
+      <thead>
+        <tr>
+          <th>Placa</th>
+          <th>Tipo</th>
+          <th>Marca</th>
+          <th>Modelo</th>
+          <th>Color</th>
+          <th>Fecha Caducidad</th>
+          <th>Conductor</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (vehiculo of vehiculosPaginados; track vehiculo.placa) {
+          <tr>
+            <td><strong>{{ vehiculo.placa }}</strong></td>
+            <td>{{ vehiculo.tipo }}</td>
+            <td>{{ vehiculo.marca }}</td>
+            <td>{{ vehiculo.modelo }}</td>
+            <td>{{ vehiculo.color }}</td>
+            <td>{{ formatearFecha(vehiculo.fechaCaducidad) }}</td>
+            <td>{{ vehiculo.conductorCodigo }}</td>
+            <td class="acciones">
+              <a [routerLink]="['/vehiculo', vehiculo.placa]" class="btn-editar" title="Editar">
+                ✏️
+              </a>
+              <button (click)="eliminarVehiculo(vehiculo.placa)" class="btn-eliminar" title="Eliminar">
+                🗑️
+              </button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="8" class="no-resultados">
+              No se encontraron vehículos
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Paginación -->
+  @if (totalPaginas > 1) {
+    <div class="paginacion">
+      <button 
+        (click)="cambiarPagina(pag - 1)" 
+        [disabled]="pag === 1"
+        class="btn-paginacion"
+      >
+        Anterior
+      </button>
+      
+      <span class="info-pagina">
+        Página {{ pag }} de {{ totalPaginas }}
+      </span>
+      
+      <button 
+        (click)="cambiarPagina(pag + 1)" 
+        [disabled]="pag === totalPaginas"
+        class="btn-paginacion"
+      >
+        Siguiente
+      </button>
+    </div>
+  }
+</div>

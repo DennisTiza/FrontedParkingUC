@@ -21,7 +21,7 @@ export class Register {
 
   roles = [
     { value: 'VIGILANTE', label: 'Vigilante' },
-    { value: 'ADMINISTRATIVO', label: 'Administrativo' },
+    { value: 'ADMINISTRADOR', label: 'Administrador' },
     { value: 'SUPERUSUARIO', label: 'Superusuario' }
   ];
 
@@ -48,19 +48,13 @@ export class Register {
     this.authService.register(this.registerForm.value).subscribe({
       next: (res) => {
         this.successMessage = res.message;
-        this.router.navigate(['/login']);
+        alert('Usuario registrado correctamente');
+        this.registerForm.reset();
       },
       error: (err) => {
         this.errorMessage = err?.error?.message || 'Error al registrar el usuario';
       },
       complete: () => (this.isLoading = false)
-    });
-  }
-
-  private markFormGroupTouched() {
-    Object.keys(this.registerForm.controls).forEach(key => {
-      const control = this.registerForm.get(key);
-      control?.markAsTouched();
     });
   }
 
