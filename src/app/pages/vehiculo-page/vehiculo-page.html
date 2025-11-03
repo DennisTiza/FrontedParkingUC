@@ -1,7 +1,42 @@
 <div class="registro-container">
   <h2>Registro de Vehículo</h2>
 
+  @if (errorMessage) {
+    <div class="error-message">
+      {{ errorMessage }}
+    </div>
+  }
+
+  @if (successMessage) {
+    <div class="success-message">
+      {{ successMessage }}
+    </div>
+  }
+
   <form [formGroup]="fGroup" (ngSubmit)="registrarVehiculo()" class="registro-form">
+
+    <!-- Tipo (primero para determinar formato de placa) -->
+    <div class="form-group">
+      <label for="tipo">Tipo de Vehículo</label>
+      <select
+        id="tipo"
+        formControlName="tipo"
+        [class.error]="ObtenerFormGroup['tipo']?.invalid && ObtenerFormGroup['tipo']?.touched"
+      >
+        <option value="">Seleccione el tipo</option>
+        @for (tipo of tiposVehiculo; track tipo) {
+          <option [value]="tipo">{{ tipo }}</option>
+        }
+      </select>
+
+      @if (ObtenerFormGroup['tipo']?.invalid && ObtenerFormGroup['tipo']?.touched) {
+        <div class="validation-error">
+          @if (ObtenerFormGroup['tipo']?.errors?.['required']) {
+            <div>El tipo de vehículo es requerido</div>
+          }
+        </div>
+      }
+    </div>
 
     <!-- Placa -->
     <div class="form-group">
@@ -11,21 +46,35 @@
         id="placa"
         formControlName="placa"
         placeholder="Ingrese la placa"
-        required
+        [class.error]="ObtenerFormGroup['placa']?.invalid && ObtenerFormGroup['placa']?.touched"
+        style="text-transform: uppercase;"
       />
-    </div>
 
-    <!-- Tipo -->
-    <div class="form-group">
-      <label for="tipo">Tipo de Vehículo</label>
-      <select
-        id="tipo"
-        formControlName="tipo"
-        required
-      >
-        <option value="" disabled selected>Seleccione el tipo</option>
-        <option *ngFor="let tipo of tiposVehiculo" [value]="tipo">{{ tipo }}</option>
-      </select>
+      @if (ObtenerFormGroup['placa']?.invalid && ObtenerFormGroup['placa']?.touched) {
+        <div class="validation-error">
+          @if (ObtenerFormGroup['placa']?.errors?.['required']) {
+            <div>La placa es requerida</div>
+          }
+          @if (ObtenerFormGroup['placa']?.errors?.['minlength']) {
+            <div>La placa debe tener al menos 4 caracteres</div>
+          }
+          @if (ObtenerFormGroup['placa']?.errors?.['formatoPlacaCarro']) {
+            <div>Formato inválido para CARRO. Debe ser: ABC123 o ABC1234 (3 letras + 3 o 4 números)</div>
+          }
+          @if (ObtenerFormGroup['placa']?.errors?.['formatoPlacaMoto']) {
+            <div>Formato inválido para MOTO. Debe ser: ABC12D o ABC12 (3 letras + 2 números + opcional 1 letra)</div>
+          }
+        </div>
+      }
+      @if (ObtenerFormGroup['tipo']?.value) {
+        <small class="info-text">
+          @if (ObtenerFormGroup['tipo']?.value === 'CARRO') {
+            Formato: ABC123 o ABC1234
+          } @else if (ObtenerFormGroup['tipo']?.value === 'MOTO') {
+            Formato: ABC12D o ABC12
+          }
+        </small>
+      }
     </div>
 
     <!-- Marca -->
@@ -36,8 +85,16 @@
         id="marca"
         formControlName="marca"
         placeholder="Ingrese la marca"
-        required
+        [class.error]="ObtenerFormGroup['marca']?.invalid && ObtenerFormGroup['marca']?.touched"
       />
+
+      @if (ObtenerFormGroup['marca']?.invalid && ObtenerFormGroup['marca']?.touched) {
+        <div class="validation-error">
+          @if (ObtenerFormGroup['marca']?.errors?.['required']) {
+            <div>La marca es requerida</div>
+          }
+        </div>
+      }
     </div>
 
     <!-- Modelo -->
@@ -48,8 +105,16 @@
         id="modelo"
         formControlName="modelo"
         placeholder="Ingrese el modelo"
-        required
+        [class.error]="ObtenerFormGroup['modelo']?.invalid && ObtenerFormGroup['modelo']?.touched"
       />
+
+      @if (ObtenerFormGroup['modelo']?.invalid && ObtenerFormGroup['modelo']?.touched) {
+        <div class="validation-error">
+          @if (ObtenerFormGroup['modelo']?.errors?.['required']) {
+            <div>El modelo es requerido</div>
+          }
+        </div>
+      }
     </div>
 
     <!-- Color -->
@@ -60,8 +125,16 @@
         id="color"
         formControlName="color"
         placeholder="Ingrese el color"
-        required
+        [class.error]="ObtenerFormGroup['color']?.invalid && ObtenerFormGroup['color']?.touched"
       />
+
+      @if (ObtenerFormGroup['color']?.invalid && ObtenerFormGroup['color']?.touched) {
+        <div class="validation-error">
+          @if (ObtenerFormGroup['color']?.errors?.['required']) {
+            <div>El color es requerido</div>
+          }
+        </div>
+      }
     </div>
 
     <!-- Fecha de Caducidad -->
@@ -71,8 +144,16 @@
         type="date"
         id="fechaCaducidad"
         formControlName="fechaCaducidad"
-        required
+        [class.error]="ObtenerFormGroup['fechaCaducidad']?.invalid && ObtenerFormGroup['fechaCaducidad']?.touched"
       />
+
+      @if (ObtenerFormGroup['fechaCaducidad']?.invalid && ObtenerFormGroup['fechaCaducidad']?.touched) {
+        <div class="validation-error">
+          @if (ObtenerFormGroup['fechaCaducidad']?.errors?.['required']) {
+            <div>La fecha de caducidad es requerida</div>
+          }
+        </div>
+      }
     </div>
 
     <!-- Código del Conductor -->
@@ -83,8 +164,16 @@
         id="conductorCodigo"
         formControlName="conductorCodigo"
         placeholder="Ingrese el código del conductor"
-        required
+        [class.error]="ObtenerFormGroup['conductorCodigo']?.invalid && ObtenerFormGroup['conductorCodigo']?.touched"
       />
+
+      @if (ObtenerFormGroup['conductorCodigo']?.invalid && ObtenerFormGroup['conductorCodigo']?.touched) {
+        <div class="validation-error">
+          @if (ObtenerFormGroup['conductorCodigo']?.errors?.['required']) {
+            <div>El código del conductor es requerido</div>
+          }
+        </div>
+      }
     </div>
 
     <!-- Botón -->
