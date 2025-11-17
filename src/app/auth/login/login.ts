@@ -25,7 +25,7 @@ export class Login {
   ) {
     this.loginForm = this.fb.group({
       correo: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      contrasena: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
@@ -67,5 +67,5 @@ onSubmit() {
   }
 
   get correo() { return this.loginForm.get('correo'); }
-  get password() { return this.loginForm.get('password'); }
+  get contrasena() { return this.loginForm.get('contrasena'); }
 }

@@ -13,12 +13,14 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class Navbar implements OnInit, OnDestroy {
   sesionActiva: boolean = false;
+  menuAbierto: boolean = false;
+
   private subscription?: Subscription;
 
   constructor(
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // Suscribirse a cambios de sesión
@@ -38,4 +40,9 @@ export class Navbar implements OnInit, OnDestroy {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+
+  toggleMenu() {
+    this.menuAbierto = !this.menuAbierto;
+  }
+
 }

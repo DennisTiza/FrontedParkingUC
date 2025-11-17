@@ -1,22 +1,51 @@
 <nav class="navbar">
   <div class="navbar-left">
+    <button class="hamburger" (click)="toggleMenu()">☰</button>
     <img src="/assets/logo-uc.png" class="logo" />
     <span class="title">Parking UC</span>
   </div>
 
-  <div class="navbar-right">
+  <div class="navbar-right desktop-menu">
     <ng-container *ngIf="!sesionActiva">
-      <a routerLink="/login" class="login-link">Inicio de sesión</a>
+      <a routerLink="/login">Inicio de sesión</a>
     </ng-container>
 
     <ng-container *ngIf="sesionActiva">
-      <a routerLink="/entrada" class="entrada-link">Entrada</a>
-      <a routerLink="/salida" class="salida-link">Salida</a>
-      <a routerLink="/gestion-vehiculo" class="gestion-vehiculo-link">Gestión Vehículo</a>
-      <a routerLink="/vehiculo" class="vehiculo-link">Registro Vehículo</a>
-      <a routerLink="/register" class="register-link">Registro Usuario</a>
-      <a (click)="cerrarSesion()" class="cerrarsesion-link">Cerrar Sesión</a>
+      <a routerLink="/entrada">Entrada</a>
+      <a routerLink="/salida">Salida</a>
+      <a routerLink="/gestion-vehiculo">Gestión Vehículo</a>
+      <a routerLink="/vehiculo">Registro Vehículo</a>
+      <a routerLink="/visitante">Registro Visitante</a>
+      <a routerLink="/register">Registro Usuario</a>
+      <a (click)="cerrarSesion()">Cerrar Sesión</a>
     </ng-container>
   </div>
 </nav>
+
+<!-- SIDEBAR -->
+<div class="sidebar" [class.open]="menuAbierto">
+  <div class="sidebar-header">
+    <span>Menú</span>
+    <button class="close-btn" (click)="toggleMenu()">✕</button>
+  </div>
+
+  <div class="sidebar-links">
+    <ng-container *ngIf="!sesionActiva">
+      <a routerLink="/login" (click)="toggleMenu()">Inicio de sesión</a>
+    </ng-container>
+
+    <ng-container *ngIf="sesionActiva">
+      <a routerLink="/entrada" (click)="toggleMenu()">Entrada</a>
+      <a routerLink="/salida" (click)="toggleMenu()">Salida</a>
+      <a routerLink="/gestion-vehiculo" (click)="toggleMenu()">Gestión Vehículo</a>
+      <a routerLink="/vehiculo" (click)="toggleMenu()">Registro Vehículo</a>
+      <a routerLink="/visitante" (click)="toggleMenu()">Registro Visitante</a>
+      <a routerLink="/register" (click)="toggleMenu()">Registro Usuario</a>
+      <a (click)="cerrarSesion(); toggleMenu()">Cerrar Sesión</a>
+    </ng-container>
+  </div>
+</div>
+
+<!-- BACKDROP -->
+<div class="backdrop" *ngIf="menuAbierto" (click)="toggleMenu()"></div>
 

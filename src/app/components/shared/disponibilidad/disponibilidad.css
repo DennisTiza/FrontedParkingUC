@@ -48,7 +48,10 @@
   position: relative;
   animation: modalAppear 0.3s ease-out;
   font-family: "Segoe UI", sans-serif;
+  max-height: 80vh;  
+  overflow-y: auto;   
 }
+
 
 @keyframes fadeIn {
   from { opacity: 0; }
