@@ -10,6 +10,7 @@ import { VehiculoPage } from './pages/vehiculo-page/vehiculo-page';
 import { GestionVehiculoPage } from './pages/gestion-vehiculo-page/gestion-vehiculo-page';
 import { EditarVehiculoPage } from './pages/editar-vehiculo-page/editar-vehiculo-page';
 import { VisitantePage } from './pages/visitante-page/visitante-page';
+import { ReportesPage } from './pages/reportes-page/reportes-page';
 
 export const routes: Routes = [
     {
@@ -59,6 +60,10 @@ export const routes: Routes = [
     {
         path: 'visitante',
         component: VisitantePage,
+        canActivate: [ValidarSesionActivaGuard]
+    }, {
+        path: 'reportes',
+        component: ReportesPage,
         canActivate: [ValidarSesionActivaGuard]
     }
 ];

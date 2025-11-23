@@ -1,0 +1,123 @@
+<div class="registro-container">
+  <h2>Generación de Reportes</h2>
+
+  @if (errorMessage) {
+  <div class="error-message">
+    {{ errorMessage }}
+  </div>
+  }
+
+  @if (successMessage) {
+  <div class="success-message">
+    {{ successMessage }}
+  </div>
+  }
+
+  <form [formGroup]="fGroup" (ngSubmit)="generarReporte()" class="registro-form">
+
+    <!-- Tipo de Reporte -->
+    <div class="form-group">
+      <label for="tipoReporte">Tipo de Reporte</label>
+      <select id="tipoReporte" formControlName="tipoReporte"
+        [class.error]="ObtenerFormGroup['tipoReporte']?.invalid && ObtenerFormGroup['tipoReporte']?.touched">
+        <option value="">Seleccione el tipo de reporte</option>
+        @for (tipo of tiposReporte; track tipo) {
+        <option [value]="tipo">{{ tipo === 'OCUPACION' ? 'Ocupación' : 'Tipo de vehículo' }}</option>
+        }
+      </select>
+
+      @if (ObtenerFormGroup['tipoReporte']?.invalid && ObtenerFormGroup['tipoReporte']?.touched) {
+      <div class="validation-error">
+        @if (ObtenerFormGroup['tipoReporte']?.errors?.['required']) {
+        <div>El tipo de reporte es requerido</div>
+        }
+      </div>
+      }
+    </div>
+
+    <!-- Tipo de Vehículo (solo visible si tipoReporte es TIPO_VEHICULO) -->
+    @if (ObtenerFormGroup['tipoReporte']?.value === 'TIPO_VEHICULO') {
+    <div class="form-group">
+      <label for="tipoVehiculo">Tipo de Vehículo</label>
+      <select id="tipoVehiculo" formControlName="tipoVehiculo"
+        [class.error]="ObtenerFormGroup['tipoVehiculo']?.invalid && ObtenerFormGroup['tipoVehiculo']?.touched">
+        <option value="">Seleccione el tipo de vehículo</option>
+        @for (tipo of tiposVehiculo; track tipo) {
+        <option [value]="tipo">{{ tipo }}</option>
+        }
+      </select>
+
+      @if (ObtenerFormGroup['tipoVehiculo']?.invalid && ObtenerFormGroup['tipoVehiculo']?.touched) {
+      <div class="validation-error">
+        @if (ObtenerFormGroup['tipoVehiculo']?.errors?.['required']) {
+        <div>El tipo de vehículo es requerido</div>
+        }
+      </div>
+      }
+    </div>
+    }
+
+    <!-- Periodicidad -->
+    <div class="form-group">
+      <label for="periodicidad">Periodicidad</label>
+      <select id="periodicidad" formControlName="periodicidad"
+        [class.error]="ObtenerFormGroup['periodicidad']?.invalid && ObtenerFormGroup['periodicidad']?.touched">
+        <option value="">Seleccione la periodicidad</option>
+        @for (periodo of periodicidades; track periodo) {
+        <option [value]="periodo">{{ periodo.charAt(0) + periodo.slice(1).toLowerCase() }}</option>
+        }
+      </select>
+
+      @if (ObtenerFormGroup['periodicidad']?.invalid && ObtenerFormGroup['periodicidad']?.touched) {
+      <div class="validation-error">
+        @if (ObtenerFormGroup['periodicidad']?.errors?.['required']) {
+        <div>La periodicidad es requerida</div>
+        }
+      </div>
+      }
+    </div>
+
+    <!-- Fecha de Inicio -->
+    <div class="form-group">
+      <label for="fechaInicio">Fecha de Inicio</label>
+      <input type="date" id="fechaInicio" formControlName="fechaInicio"
+        [class.error]="ObtenerFormGroup['fechaInicio']?.invalid && ObtenerFormGroup['fechaInicio']?.touched" />
+
+      @if (ObtenerFormGroup['fechaInicio']?.invalid && ObtenerFormGroup['fechaInicio']?.touched) {
+      <div class="validation-error">
+        @if (ObtenerFormGroup['fechaInicio']?.errors?.['required']) {
+        <div>La fecha de inicio es requerida</div>
+        }
+      </div>
+      }
+    </div>
+
+    <!-- Fecha Fin -->
+    <div class="form-group">
+      <label for="fechaFin">Fecha Fin</label>
+      <input type="date" id="fechaFin" formControlName="fechaFin"
+        [class.error]="ObtenerFormGroup['fechaFin']?.invalid && ObtenerFormGroup['fechaFin']?.touched" />
+
+      @if (ObtenerFormGroup['fechaFin']?.invalid && ObtenerFormGroup['fechaFin']?.touched) {
+      <div class="validation-error">
+        @if (ObtenerFormGroup['fechaFin']?.errors?.['required']) {
+        <div>La fecha fin es requerida</div>
+        }
+      </div>
+      }
+    </div>
+
+    <!-- Validación de rango de fechas -->
+    @if (fGroup.errors?.['rangoFechasInvalido'] && (ObtenerFormGroup['fechaInicio']?.touched ||
+    ObtenerFormGroup['fechaFin']?.touched)) {
+    <div class="validation-error">
+      <div>La fecha de inicio no puede ser mayor a la fecha fin</div>
+    </div>
+    }
+
+    <!-- Botón -->
+    <button type="submit" class="btn-registrar" [disabled]="fGroup.invalid">
+      Generar Reporte
+    </button>
+  </form>
+</div>
