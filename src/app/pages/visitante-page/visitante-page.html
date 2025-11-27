@@ -1,0 +1,105 @@
+<div class="registro-container">
+  <h2>Registro de Visitantes</h2>
+
+  <form [formGroup]="fGroup" (ngSubmit)="registrarVisitante()" class="registro-form">
+
+    <!-- NOMBRE -->
+    <div class="form-group">
+      <label>Nombre</label>
+      <input
+        type="text"
+        formControlName="nombre"
+        placeholder=""
+        [class.error]="ObtenerFormGroup['nombre']?.invalid && ObtenerFormGroup['nombre']?.touched"
+      />
+    </div>
+
+    <!-- APELLIDO -->
+    <div class="form-group">
+      <label>Apellido</label>
+      <input
+        type="text"
+        formControlName="apellido"
+        placeholder=""
+        [class.error]="ObtenerFormGroup['apellido']?.invalid && ObtenerFormGroup['apellido']?.touched"
+      />
+    </div>
+
+    <!-- CÉDULA -->
+    <div class="form-group">
+      <label>Cédula</label>
+      <input
+        type="text"
+        formControlName="cedula"
+        placeholder=""
+        [class.error]="ObtenerFormGroup['cedula']?.invalid && ObtenerFormGroup['cedula']?.touched"
+      />
+    </div>
+
+    <!-- TELÉFONO -->
+    <div class="form-group">
+      <label>Teléfono</label>
+      <input
+        type="text"
+        formControlName="telefono"
+        placeholder=""
+        [class.error]="ObtenerFormGroup['telefono']?.invalid && ObtenerFormGroup['telefono']?.touched"
+      />
+    </div>
+
+    <!-- CORREO -->
+    <div class="form-group full-width">
+      <label>Correo *</label>
+      <input
+        type="email"
+        formControlName="correo"
+        placeholder=""
+        [class.error]="ObtenerFormGroup['correo']?.invalid && ObtenerFormGroup['correo']?.touched"
+      />
+    </div>
+
+    <!-- TIPO VEHÍCULO -->
+    <div class="form-group">
+      <label>Tipo de vehículo</label>
+      <select
+        formControlName="tipoVehiculo"
+        [class.error]="ObtenerFormGroup['tipoVehiculo']?.invalid && ObtenerFormGroup['tipoVehiculo']?.touched"
+      >
+        <option value="">Seleccione</option>
+        @for (t of tiposVehiculo; track t) {
+          <option [value]="t">{{ t }}</option>
+        }
+      </select>
+    </div>
+
+    <!-- PLACA -->
+    <div class="form-group">
+      <label>Placa</label>
+      <input
+        type="text"
+        formControlName="placa"
+        placeholder=""
+        style="text-transform: uppercase"
+        [class.error]="ObtenerFormGroup['placa']?.invalid && ObtenerFormGroup['placa']?.touched"
+      />
+    </div>
+
+    <!-- MOTIVO -->
+    <div class="form-group full-width">
+      <label>Motivo</label>
+      <textarea
+        formControlName="motivo"
+        rows="3"
+        placeholder=""
+        [class.error]="ObtenerFormGroup['motivo']?.invalid && ObtenerFormGroup['motivo']?.touched"
+      ></textarea>
+    </div>
+
+    <!-- BOTÓN -->
+    <button type="submit" class="btn-registrar" [disabled]="fGroup.invalid">
+      Registrar visita
+    </button>
+  </form>
+    <div class="espaciador-final"></div>
+</div>
+

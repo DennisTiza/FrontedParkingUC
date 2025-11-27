@@ -9,7 +9,7 @@
       type="text"
       [value]="searchQuery"
       (input)="searchQuery = $event.target.value; filtrarVehiculo()"
-      placeholder="Buscar por placa, tipo, marca, modelo, color o código conductor..."
+      placeholder="Buscar por placa, tipo, marca.."
       class="search-input"
     />
   </div>
@@ -34,6 +34,7 @@
           <th>Acciones</th>
         </tr>
       </thead>
+
       <tbody>
         @for (vehiculo of vehiculosPaginados; track vehiculo.placa) {
           <tr>
@@ -44,6 +45,7 @@
             <td>{{ vehiculo.color }}</td>
             <td>{{ formatearFecha(vehiculo.fechaCaducidad) }}</td>
             <td>{{ vehiculo.conductorCodigo }}</td>
+
             <td class="acciones">
               <a [routerLink]="['/vehiculo', vehiculo.placa]" class="btn-editar" title="Editar">
                 ✏️
@@ -61,6 +63,7 @@
           </tr>
         }
       </tbody>
+
     </table>
   </div>
 
@@ -88,4 +91,5 @@
       </button>
     </div>
   }
+  <div class="espaciador-final"></div>
 </div>

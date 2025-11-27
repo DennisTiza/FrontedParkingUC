@@ -19,13 +19,13 @@
             </div>
 
             <div class="form-group">
-                <label for="password">Contraseña</label>
-                <input type="password" id="password" formControlName="password" placeholder="••••••••"
-                    [class.error]="password?.invalid && password?.touched">
+                <label for="contrasena">Contraseña</label>
+                <input type="password" id="contrasena" formControlName="contrasena" placeholder="••••••••"
+                    [class.error]="contrasena?.invalid && contrasena?.touched">
 
-                <div *ngIf="password?.invalid && password?.touched" class="validation-error">
-                    <div *ngIf="password?.errors?.['required']">La contraseña es requerida</div>
-                    <div *ngIf="password?.errors?.['minlength']">
+                <div *ngIf="contrasena?.invalid && contrasena?.touched" class="validation-error">
+                    <div *ngIf="contrasena?.errors?.['required']">La contraseña es requerida</div>
+                    <div *ngIf="contrasena?.errors?.['minlength']">
                         La contraseña debe tener al menos 6 caracteres
                     </div>
                 </div>

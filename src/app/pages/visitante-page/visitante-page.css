@@ -1,0 +1,141 @@
+/* Contenedor general */
+.registro-container {
+    max-width: 850px;
+    margin: 1.5rem auto;
+    background: #f9f9f9;
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid #e8e8e8;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+h2 {
+    text-align: center;
+    color: #222;
+    margin-bottom: 1.5rem;
+}
+
+/* Grid: 2 columnas por defecto */
+.registro-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem 1.6rem;
+    align-items: start;
+}
+
+/* Elementos que ocupan todo el ancho */
+.full-width {
+    grid-column: 1 / -1;
+    /* ocupa todas las columnas (robusto) */
+}
+
+/* Form-group */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+/* Inputs */
+input,
+select,
+textarea {
+    padding: 0.72rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #fbfbfb;
+    font-size: 1rem;
+    transition: border-color .18s ease, box-shadow .18s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #222;
+    background: #fff;
+    outline: none;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+}
+
+/* Errores */
+.error {
+    border-color: #d9534f !important;
+}
+
+/* Textarea */
+textarea {
+    min-height: 82px;
+    resize: vertical;
+}
+
+/* Botón */
+.btn-registrar {
+    grid-column: 1 / -1;
+    margin-top: 0.6rem;
+    background: #000;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    padding: 0.9rem 0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background .15s ease, transform .06s ease;
+    width: 40%;
+    justify-self: center;
+}
+
+.btn-registrar:hover {
+    background: #222;
+}
+
+.btn-registrar:disabled {
+    background: #777;
+    cursor: not-allowed;
+    opacity: .9;
+}
+
+/* ---------- RESPONSIVE: móvil (una columna) ---------- */
+/* Este media query fuerza el grid a 1 columna y asegura
+   que los elementos .full-width ocupen solo 1 columna (comportamiento correcto) */
+@media (max-width: 720px) {
+    .registro-form {
+        grid-template-columns: 1fr;
+        gap: 0.9rem;
+    }
+
+    .full-width {
+        grid-column: auto;
+        /* ahora cada elemento ocupa 1 columna */
+    }
+
+    .btn-registrar {
+        width: 100%;
+        justify-self: stretch;
+        font-size: 1rem;
+    }
+
+    .registro-container {
+        padding: 1.2rem;
+        margin: 0.8rem;
+    }
+
+    input,
+    select,
+    textarea {
+        font-size: 0.97rem;
+        padding: 0.68rem;
+    }
+
+    .espaciador-final {
+        height: 40px;
+        /* Ajusta según el tamaño del botón flotante */
+        width: 100%;
+    }
+}

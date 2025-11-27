@@ -4,5 +4,5 @@ export class UsuarioModel {
     cedula?: string;
     role?: string;
     email?: string;
-    password?: string;
+    contrasena?: string;
 }
