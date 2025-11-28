@@ -6,4 +6,6 @@ export class VehiculoModel {
     color?: string;
     fechaCaducidad?: string;
     conductorCodigo?: string;
+    tipoPropietario?: string;
+    propietarioId?: string;
 }

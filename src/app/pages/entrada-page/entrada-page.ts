@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { EntradaService } from '../../services/entrada.service';
 import { EntradaModel } from '../../models/entrada.model';
+import { parqueaderoService } from '../../services/parqueadero.service';
 
 @Component({
   selector: 'app-registrar-entrada',
@@ -17,7 +18,8 @@ export class EntradaPage implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private EntradaService: EntradaService
+    private EntradaService: EntradaService,
+    private parqueaderoService: parqueaderoService
   ) {}
 
   ngOnInit(): void {
@@ -54,12 +56,13 @@ export class EntradaPage implements OnInit {
     const datos: EntradaModel = {
       vehiculoPlaca: campos['placa'].value,
       usuarioId: localStorage.getItem('sesion') ? JSON.parse(localStorage.getItem('sesion')!).user.id : null,
-      parqueaderoId: localStorage.getItem('sesion') ? JSON.parse(localStorage.getItem('sesion')!).parqueadero : null
+      parqueaderoId: localStorage.getItem('sesion') ? JSON.parse(localStorage.getItem('sesion')!).parqueadero : null 
     };
 
     this.EntradaService.registrarEntrada(datos).subscribe({
       next: () => {
         alert('Entrada registrada correctamente');
+        this.parqueaderoService.refrescarParqueadero(datos.parqueaderoId!);
         this.fGroup.reset();
         this.setHoraActual();
       },

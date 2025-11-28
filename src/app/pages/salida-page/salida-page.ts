@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { SalidaService } from '../../services/salida.service';
 import { SalidaModel } from '../../models/salida.model';
+import { parqueaderoService } from '../../services/parqueadero.service';
 
 @Component({
   selector: 'app-registrar-salida',
@@ -17,7 +18,8 @@ export class SalidaPage implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private SalidaService: SalidaService
+    private SalidaService: SalidaService,
+    private parqueaderoService: parqueaderoService
   ) {}
 
   ngOnInit(): void {
@@ -59,6 +61,7 @@ export class SalidaPage implements OnInit {
     this.SalidaService.registrarSalida(datos, placa).subscribe({
       next: () => {
         alert('Salida registrada correctamente');
+        this.parqueaderoService.refrescarParqueadero(localStorage.getItem('sesion') ? JSON.parse(localStorage.getItem('sesion')!).parqueadero : null!);
         this.fGroup.reset();
         this.setHoraActual();
       },

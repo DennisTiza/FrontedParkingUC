@@ -18,6 +18,7 @@ export class Disponibilidad implements OnInit{
     mostrarModal = false;
     vehicle:any[] = [];
     private parqueaderoId?: number;
+    estadoBoton: 'ok' | 'critico' = 'ok';
 
   constructor(
     private authService: AuthService,
@@ -41,6 +42,7 @@ export class Disponibilidad implements OnInit{
       next: (data) => {
         if (data) {
           this.vehicle = this.transformToVehicleAvailability(data);
+          this.actualizarEstadoBoton(data);
         }
       }
     });
@@ -98,4 +100,23 @@ export class Disponibilidad implements OnInit{
       this.parqueaderoService.refrescarParqueadero(parqueaderoId);
     }
   }
+
+  actualizarEstadoBoton(data: ParqueaderoModel) {
+    const carros = data.cuposDisponiblesCarros ?? 0;
+    const capCarros = data.capacidadCarros ?? 1;
+    const motos = data.cuposDisponiblesMotos ?? 0;
+    const capMotos = data.capacidadMotos ?? 1;
+
+    const totalDisponibles = carros + motos;
+    const totalCapacidad = capCarros + capMotos;
+
+    const porcentaje = totalDisponibles / totalCapacidad;
+
+    if (porcentaje <= 0.2) {
+      this.estadoBoton = 'critico';
+    } else {
+      this.estadoBoton = 'ok';
+  }
+}
+
 }

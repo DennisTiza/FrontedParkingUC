@@ -14,8 +14,26 @@
   z-index: 999; /* Asegurar que esté sobre otros elementos pero bajo el modal */
 }
 
+.btn-critico {
+  background-color: #e74c3c; /* rojo */
+  animation: alerta 1.1s infinite;
+}
+
+@keyframes alerta {
+  0% { opacity: 1; }
+  50% { opacity: .6; }
+  100% { opacity: 1; }
+}
+
+
 .btn-disponibilidad:hover {
   background-color: #2a3a7c;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(26, 42, 108, 0.4);
+}
+
+.btn-critico:hover {
+  background-color: #c03e30ff;;
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(26, 42, 108, 0.4);
 }
@@ -155,3 +173,4 @@
   padding-top: 15px;
   border-top: 1px solid #eee;
 }
+

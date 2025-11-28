@@ -35,7 +35,7 @@ export class VehiculoPage implements OnInit {
       modelo: ['', [Validators.required]],
       color: ['', [Validators.required]],
       fechaCaducidad: ['', [Validators.required]],
-      conductorCodigo: ['', [Validators.required]]
+      conductorCodigo: ['', [Validators.required]],
     });
 
     // Agregar validación de placa cuando cambie el tipo
@@ -107,7 +107,8 @@ export class VehiculoPage implements OnInit {
       modelo: campos['modelo'].value,
       color: campos['color'].value,
       fechaCaducidad: campos['fechaCaducidad'].value,
-      conductorCodigo: campos['conductorCodigo'].value
+      propietarioId: campos['conductorCodigo'].value,
+      tipoPropietario: 'INSTITUCIONAL' // Valor fijo por ahora
     };
 
     this.vehiculoService.registrarVehiculo(datos).subscribe({

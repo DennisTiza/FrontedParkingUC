@@ -1,6 +1,12 @@
-<button class="btn-disponibilidad" *ngIf="sesionActiva" (click)="abrirModal()">
+<button class="btn-disponibilidad" *ngIf="sesionActiva" (click)="abrirModal()"
+  [ngClass]="{
+    'btn-ok': estadoBoton === 'ok',
+    'btn-critico': estadoBoton === 'critico'
+  }"
+>
   Disponibilidad
 </button>
+
 
 <div class="overlay" *ngIf="mostrarModal">
   <div class="modal">
