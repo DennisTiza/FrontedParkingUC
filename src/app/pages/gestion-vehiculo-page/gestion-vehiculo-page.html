@@ -26,9 +26,6 @@
         <tr>
           <th>Placa</th>
           <th>Tipo</th>
-          <th>Marca</th>
-          <th>Modelo</th>
-          <th>Color</th>
           <th>Fecha Caducidad</th>
           <th>Conductor</th>
           <th>Acciones</th>
@@ -40,9 +37,6 @@
           <tr>
             <td><strong>{{ vehiculo.placa }}</strong></td>
             <td>{{ vehiculo.tipo }}</td>
-            <td>{{ vehiculo.marca }}</td>
-            <td>{{ vehiculo.modelo }}</td>
-            <td>{{ vehiculo.color }}</td>
             <td>{{ formatearFecha(vehiculo.fechaCaducidad) }}</td>
             <td>{{ vehiculo.conductorCodigo }}</td>
 
@@ -50,9 +44,9 @@
               <a [routerLink]="['/vehiculo', vehiculo.placa]" class="btn-editar" title="Editar">
                 ✏️
               </a>
-              <button (click)="eliminarVehiculo(vehiculo.placa)" class="btn-eliminar" title="Eliminar">
+              <!-- <button (click)="eliminarVehiculo(vehiculo.placa)" class="btn-eliminar" title="Eliminar">
                 🗑️
-              </button>
+              </button> -->
             </td>
           </tr>
         } @empty {
