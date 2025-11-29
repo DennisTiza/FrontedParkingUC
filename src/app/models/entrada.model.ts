@@ -3,4 +3,5 @@ export class EntradaModel {
   hora?: Date;
   usuarioId?: number;
   parqueaderoId?: number;
+  motivo_visita?: string;
 }
