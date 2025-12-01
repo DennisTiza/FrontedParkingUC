@@ -1,10 +1,17 @@
 export class VisitanteModel {
-    nombre?: string;
-    apellido?: string;
-    cedula?: string;
-    telefono?: string;
-    correo?: string;
-    tipoVehiculo?: string;
+    conductor?: {
+        cedula?: string;
+        nombre?: string;
+        apellido?: string;
+        telefono?: string;
+        correo?: string;
+    };
     placa?: string;
-    motivo?: string;
+    tipoVehiculo?: string;
+    marca?: string;
+    modelo?: string;
+    color?: string;
+    fechaCaducidad?: string;
+    parqueaderoId?: number;
+    motivoVisita?: string;
 }
