@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validatio
 import { VisitanteService } from '../../services/visitante.service';
 import { VisitanteModel } from '../../models/visitante.model';
 import { CommonModule } from '@angular/common';
+import { parqueaderoService } from '../../services/parqueadero.service';
 
 @Component({
   selector: 'app-visitante-page',
@@ -19,7 +20,8 @@ export class VisitantePage {
 
   constructor(
     private fb: FormBuilder,
-    private visitanteService: VisitanteService
+    private visitanteService: VisitanteService,
+    private parqueaderoService: parqueaderoService
   ) {}
 
   ngOnInit(): void {
@@ -123,6 +125,7 @@ export class VisitantePage {
       next: () => {
         alert('Visitante registrado correctamente');
         this.fGroup.reset();
+        this.parqueaderoService.refrescarParqueadero(datos.parqueaderoId!);
       },
       error: (err) => {
         alert(`Error al registrar el visitante.\n${err?.error?.message || err.message}`);
