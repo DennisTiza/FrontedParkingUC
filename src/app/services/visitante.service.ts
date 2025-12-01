@@ -23,7 +23,7 @@ export class VisitanteService {
 
   registrarVisitante(data: VisitanteModel): Observable<VisitanteModel> {
     return this.http.post<VisitanteModel>(
-      `${this.urlBackend}visitante`, 
+      `${this.urlBackend}visitantes/registrar`, 
       data, 
       { headers: this.getHeaders() }
     );
@@ -31,21 +31,21 @@ export class VisitanteService {
 
   obtenerVisitantes(): Observable<VisitanteModel[]> {
     return this.http.get<VisitanteModel[]>(
-      `${this.urlBackend}visitante`, 
+      `${this.urlBackend}visitantes`, 
       { headers: this.getHeaders() }
     );
   }
 
   obtenerVisitantePorCedula(cedula: string): Observable<VisitanteModel> {
     return this.http.get<VisitanteModel>(
-      `${this.urlBackend}visitante/${cedula}`, 
+      `${this.urlBackend}visitantes/${cedula}`, 
       { headers: this.getHeaders() }
     );
   }
 
   actualizarVisitante(cedula: string, data: VisitanteModel): Observable<VisitanteModel> {
     return this.http.patch<VisitanteModel>(
-      `${this.urlBackend}visitante/${cedula}`, 
+      `${this.urlBackend}visitantes/${cedula}`, 
       data, 
       { headers: this.getHeaders() }
     );

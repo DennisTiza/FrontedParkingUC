@@ -3,48 +3,62 @@
 
   <form [formGroup]="fGroup" (ngSubmit)="registrarVisitante()" class="registro-form">
 
+    <h3 class="section-title">Datos del Conductor</h3>
+
     <!-- NOMBRE -->
     <div class="form-group">
-      <label>Nombre</label>
+      <label>Nombre *</label>
       <input
         type="text"
         formControlName="nombre"
-        placeholder=""
+        placeholder="Ingrese el nombre"
         [class.error]="ObtenerFormGroup['nombre']?.invalid && ObtenerFormGroup['nombre']?.touched"
       />
+      @if (ObtenerFormGroup['nombre']?.invalid && ObtenerFormGroup['nombre']?.touched) {
+        <span class="error-message">El nombre es requerido</span>
+      }
     </div>
 
     <!-- APELLIDO -->
     <div class="form-group">
-      <label>Apellido</label>
+      <label>Apellido *</label>
       <input
         type="text"
         formControlName="apellido"
-        placeholder=""
+        placeholder="Ingrese el apellido"
         [class.error]="ObtenerFormGroup['apellido']?.invalid && ObtenerFormGroup['apellido']?.touched"
       />
+      @if (ObtenerFormGroup['apellido']?.invalid && ObtenerFormGroup['apellido']?.touched) {
+        <span class="error-message">El apellido es requerido</span>
+      }
     </div>
 
     <!-- CÉDULA -->
     <div class="form-group">
-      <label>Cédula</label>
+      <label>Cédula *</label>
       <input
         type="text"
         formControlName="cedula"
-        placeholder=""
+        placeholder="Ingrese la cédula"
         [class.error]="ObtenerFormGroup['cedula']?.invalid && ObtenerFormGroup['cedula']?.touched"
       />
+      @if (ObtenerFormGroup['cedula']?.invalid && ObtenerFormGroup['cedula']?.touched) {
+        <span class="error-message">La cédula es requerida</span>
+      }
     </div>
 
     <!-- TELÉFONO -->
     <div class="form-group">
-      <label>Teléfono</label>
+      <label>Teléfono *</label>
       <input
         type="text"
         formControlName="telefono"
-        placeholder=""
+        placeholder="Ingrese el teléfono"
         [class.error]="ObtenerFormGroup['telefono']?.invalid && ObtenerFormGroup['telefono']?.touched"
       />
+      @if (ObtenerFormGroup['telefono']?.invalid && ObtenerFormGroup['telefono']?.touched) {
+        <span class="error-message">El teléfono es requerido</span>
+      }
     </div>
 
     <!-- CORREO -->
@@ -53,14 +67,25 @@
       <input
         type="email"
         formControlName="correo"
-        placeholder=""
+        placeholder="ejemplo@correo.com"
         [class.error]="ObtenerFormGroup['correo']?.invalid && ObtenerFormGroup['correo']?.touched"
       />
+      @if (ObtenerFormGroup['correo']?.invalid && ObtenerFormGroup['correo']?.touched) {
+        <span class="error-message">
+          @if (ObtenerFormGroup['correo']?.errors?.['required']) {
+            El correo es requerido
+          } @else if (ObtenerFormGroup['correo']?.errors?.['email']) {
+            Ingrese un correo válido
+          }
+        </span>
+      }
     </div>
+
+    <h3 class="section-title">Datos del Vehículo</h3>
 
     <!-- TIPO VEHÍCULO -->
     <div class="form-group">
-      <label>Tipo de vehículo</label>
+      <label>Tipo de vehículo *</label>
       <select
         formControlName="tipoVehiculo"
         [class.error]="ObtenerFormGroup['tipoVehiculo']?.invalid && ObtenerFormGroup['tipoVehiculo']?.touched"
@@ -70,29 +95,101 @@
           <option [value]="t">{{ t }}</option>
         }
       </select>
+      @if (ObtenerFormGroup['tipoVehiculo']?.invalid && ObtenerFormGroup['tipoVehiculo']?.touched) {
+        <span class="error-message">Seleccione el tipo de vehículo</span>
+      }
     </div>
 
     <!-- PLACA -->
     <div class="form-group">
-      <label>Placa</label>
+      <label>Placa *</label>
       <input
         type="text"
         formControlName="placa"
-        placeholder=""
+        placeholder="ABC123"
         style="text-transform: uppercase"
         [class.error]="ObtenerFormGroup['placa']?.invalid && ObtenerFormGroup['placa']?.touched"
       />
+      @if (ObtenerFormGroup['placa']?.invalid && ObtenerFormGroup['placa']?.touched) {
+        <span class="error-message">
+          @if (ObtenerFormGroup['placa']?.errors?.['required']) {
+            La placa es requerida
+          } @else if (ObtenerFormGroup['placa']?.errors?.['formatoPlacaCarro']) {
+            Formato de placa de carro inválido (ej: ABC123)
+          } @else if (ObtenerFormGroup['placa']?.errors?.['formatoPlacaMoto']) {
+            Formato de placa de moto inválido (ej: ABC12D)
+          }
+        </span>
+      }
+    </div>
+
+    <!-- MARCA -->
+    <div class="form-group">
+      <label>Marca *</label>
+      <input
+        type="text"
+        formControlName="marca"
+        placeholder="Ingrese la marca"
+        [class.error]="ObtenerFormGroup['marca']?.invalid && ObtenerFormGroup['marca']?.touched"
+      />
+      @if (ObtenerFormGroup['marca']?.invalid && ObtenerFormGroup['marca']?.touched) {
+        <span class="error-message">La marca es requerida</span>
+      }
+    </div>
+
+    <!-- MODELO -->
+    <div class="form-group">
+      <label>Modelo *</label>
+      <input
+        type="text"
+        formControlName="modelo"
+        placeholder="Ingrese el modelo"
+        [class.error]="ObtenerFormGroup['modelo']?.invalid && ObtenerFormGroup['modelo']?.touched"
+      />
+      @if (ObtenerFormGroup['modelo']?.invalid && ObtenerFormGroup['modelo']?.touched) {
+        <span class="error-message">El modelo es requerido</span>
+      }
+    </div>
+
+    <!-- COLOR -->
+    <div class="form-group">
+      <label>Color *</label>
+      <input
+        type="text"
+        formControlName="color"
+        placeholder="Ingrese el color"
+        [class.error]="ObtenerFormGroup['color']?.invalid && ObtenerFormGroup['color']?.touched"
+      />
+      @if (ObtenerFormGroup['color']?.invalid && ObtenerFormGroup['color']?.touched) {
+        <span class="error-message">El color es requerido</span>
+      }
+    </div>
+
+    <!-- FECHA CADUCIDAD -->
+    <div class="form-group">
+      <label>Fecha de caducidad *</label>
+      <input
+        type="date"
+        formControlName="fechaCaducidad"
+        [class.error]="ObtenerFormGroup['fechaCaducidad']?.invalid && ObtenerFormGroup['fechaCaducidad']?.touched"
+      />
+      @if (ObtenerFormGroup['fechaCaducidad']?.invalid && ObtenerFormGroup['fechaCaducidad']?.touched) {
+        <span class="error-message">La fecha de caducidad es requerida</span>
+      }
     </div>
 
     <!-- MOTIVO -->
     <div class="form-group full-width">
-      <label>Motivo</label>
+      <label>Motivo de la visita *</label>
       <textarea
         formControlName="motivo"
         rows="3"
-        placeholder=""
+        placeholder="Describa el motivo de su visita"
         [class.error]="ObtenerFormGroup['motivo']?.invalid && ObtenerFormGroup['motivo']?.touched"
       ></textarea>
+      @if (ObtenerFormGroup['motivo']?.invalid && ObtenerFormGroup['motivo']?.touched) {
+        <span class="error-message">El motivo es requerido</span>
+      }
     </div>
 
     <!-- BOTÓN -->
@@ -100,6 +197,5 @@
       Registrar visita
     </button>
   </form>
-    <div class="espaciador-final"></div>
+  <div class="espaciador-final"></div>
 </div>
-
