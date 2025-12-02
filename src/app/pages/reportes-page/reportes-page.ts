@@ -111,7 +111,8 @@ export class ReportesPage implements OnInit {
 
     if (datos.periodicidad === 'DIARIO') {
       this.reporteService.generarReporteDiario(datos).subscribe({
-        next: () => {
+        next: (blob) => {
+          this.reporteService.downloadBlob(blob, 'reporte_diario.pdf');
           this.successMessage = 'Reporte generado correctamente, verifica tus archivos descargados.';
           this.fGroup.reset();
         },
@@ -121,7 +122,8 @@ export class ReportesPage implements OnInit {
       });
     } else if (datos.periodicidad === 'SEMANAL' && datos.tipoReporte === 'OCUPACION') {
       this.reporteService.generarReporteSemanalXParqueadero(datos).subscribe({
-        next: () => {
+        next: (blob) => {
+          this.reporteService.downloadBlob(blob, 'reporte_semanal_ocupacion.pdf');
           this.successMessage = 'Reporte generado correctamente, verifica tus archivos descargados.';
           this.fGroup.reset();
         },
@@ -131,7 +133,8 @@ export class ReportesPage implements OnInit {
       });
     } else if (datos.periodicidad === 'MENSUAL' && datos.tipoReporte === 'OCUPACION') {
       this.reporteService.generarReporteMensualXParqueadero(datos).subscribe({
-       next: () => {
+       next: (blob) => {
+          this.reporteService.downloadBlob(blob, 'reporte_mensual_ocupacion.pdf');
           this.successMessage = 'Reporte generado correctamente, verifica tus archivos descargados.';
           this.fGroup.reset();
         },
@@ -141,7 +144,8 @@ export class ReportesPage implements OnInit {
       });
     } else if (datos.periodicidad === 'SEMANAL' && datos.tipoReporte === 'TIPO_VEHICULO') {
       this.reporteService.generarReporteSemanalxTipo(datos).subscribe({
-        next: () => {
+        next: (blob) => {
+          this.reporteService.downloadBlob(blob, 'reporte_semanal_tipo_vehiculo.pdf');
           this.successMessage = 'Reporte generado correctamente, verifica tus archivos descargados.';
           this.fGroup.reset();
         },
@@ -151,7 +155,8 @@ export class ReportesPage implements OnInit {
       });
     } else if (datos.periodicidad === 'MENSUAL' && datos.tipoReporte === 'TIPO_VEHICULO') {
       this.reporteService.generarReporteMensualxTipo(datos).subscribe({
-        next: () => {
+        next: (blob) => {
+          this.reporteService.downloadBlob(blob, 'reporte_mensual_tipo_vehiculo.pdf');
           this.successMessage = 'Reporte generado correctamente, verifica tus archivos descargados.';
           this.fGroup.reset();
         },

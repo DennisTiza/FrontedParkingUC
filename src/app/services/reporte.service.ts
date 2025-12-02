@@ -88,4 +88,20 @@ export class ReporteService {
     return this.http.get(`${this.urlBackend}reporte/vehiculo/mes?tipo=${data.tipoVehiculo}&anio=${anio}&mes=${mes}`,
       { headers, responseType: 'blob' });
   }
+
+  downloadBlob(blob: Blob, fileName: string = 'reporte.pdf'): void {
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    a.style.display = 'none';
+
+    document.body.appendChild(a);
+    a.click();
+
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+  }
+
 }
