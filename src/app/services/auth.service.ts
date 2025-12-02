@@ -41,6 +41,8 @@ export class AuthService {
      * Registra un nuevo usuario
      */
     register(data: UsuarioModel): Observable<any> {
+        console.log(data);
+        
         return this.http.post(`${this.urlBackend}usuario/register`, data);
     }
 
