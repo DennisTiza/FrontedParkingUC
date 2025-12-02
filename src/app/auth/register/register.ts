@@ -18,6 +18,7 @@ export class Register {
   isLoading = false;
   errorMessage = '';
   successMessage = '';
+  data = {}
 
   roles = [
     { value: 'VIGILANTE', label: 'Vigilante' },
@@ -45,7 +46,15 @@ export class Register {
     this.errorMessage = '';
     this.successMessage = '';  
 
-    this.authService.register(this.registerForm.value).subscribe({
+    this.data = {
+      "nombre": this.registerForm.value.nombre,
+      "cedula": this.registerForm.value.cedula,
+      "correo": this.registerForm.value.correo,
+      "contraseña": this.registerForm.value.password,
+      "rol": this.registerForm.value.rol
+    }
+
+    this.authService.register(this.data).subscribe({
       next: (res) => {
         this.successMessage = res.message;
         alert('Usuario registrado correctamente');
